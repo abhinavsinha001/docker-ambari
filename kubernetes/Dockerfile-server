@@ -1,0 +1,5 @@
+FROM hortonworks/ambari-server:2.2.1-v20
+
+ADD startserver.sh ./
+
+CMD ["/tmp/startserver.sh"]

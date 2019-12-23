@@ -1,0 +1,5 @@
+FROM hortonworks/ambari-agent:2.2.1-v20
+
+ADD startagent.sh ./
+
+CMD ["/tmp/startagent.sh"]

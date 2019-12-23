@@ -7,7 +7,7 @@ metadata:
   labels:
     name: amb-agent
 spec:
-  replicas: 5
+  replicas: 3
   selector:
     name: amb-agent
   template:
@@ -17,16 +17,16 @@ spec:
     spec:
       containers:
       - name: amb-agent
-        image: hortonworks/ambari-agent:2.2.1-v20
+        image: abhinavsinha001/ambari-agent:2.2.1-test
         securityContext:
           privileged: true
         resources:
           requests:
             memory: "16G"
-            cpu: "2000m"
+            cpu: "2"
           limits:
             memory: "20G"
-            cpu: "3000m"
+            cpu: "3"
         volumeMounts:
             - name: ambari-conf
               mountPath: /etc/systemd/system/ambari-agent.service.d

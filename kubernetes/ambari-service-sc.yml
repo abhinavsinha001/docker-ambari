@@ -6,8 +6,6 @@ metadata:
   namespace: ambari
   labels:
     name: ambari-server
-
-
 spec:
   ports:
     # the port that this service should serve on
