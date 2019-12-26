@@ -35,7 +35,7 @@ spec:
     spec:
       containers:
       - name: amb-agent
-        image: abhinavsinha001/ambari-agent:2.2.1-test
+        image: abhinavsinha001/ambari-agent:2.2.1-test-1
         securityContext:
           privileged: true
         resources:
