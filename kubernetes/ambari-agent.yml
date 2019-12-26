@@ -1,19 +1,37 @@
 ---
 apiVersion: v1
-kind: ReplicationController
+kind: Service
+metadata:
+  name: amb-agent
+  namespace: ambari
+  labels:
+    app: amb-agent
+spec:
+  ports:
+  - port: 8670
+    name: web
+  clusterIP: None
+  selector:
+    app: amb-agent
+
+---
+apiVersion: apps/v1
+kind: StatefulSet
 metadata:
   name: amb-agent
   namespace: ambari
   labels:
     name: amb-agent
 spec:
+  serviceName: "amb-agent"
   replicas: 3
   selector:
-    name: amb-agent
+    matchLabels:
+      app: amb-agent
   template:
     metadata:
       labels:
-        name: amb-agent
+        app: amb-agent
     spec:
       containers:
       - name: amb-agent
@@ -22,19 +40,21 @@ spec:
           privileged: true
         resources:
           requests:
-            memory: "16G"
-            cpu: "2"
+            memory: "8G"
+            cpu: "1"
           limits:
-            memory: "20G"
-            cpu: "3"
+            memory: "100G"
+            cpu: "20"
         volumeMounts:
             - name: ambari-conf
               mountPath: /etc/systemd/system/ambari-agent.service.d
             - name: ambari-scripts
               mountPath: /scripts
+            - name: hdfs-data
+              mountPath: /hadoop/hdfs
         env: 
           - name: AMBARI_SERVER
-            value: ambari-server.ambari.svc.cluster.local
+            value: ambari-server-0.ambari-server-sc.ambari.svc.cluster.local
       volumes:
           - name: ambari-conf
             configMap: 
@@ -42,4 +62,12 @@ spec:
           - name: ambari-scripts
             configMap: 
                 name: ambari-agent-scripts
+  volumeClaimTemplates:
+  - metadata:
+      name: hdfs-data
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 1000Gi    
 
