@@ -6,7 +6,7 @@ metadata:
 spec:
   clusterIP: None
   selector:
-    name: amb-agent
+    app: amb-agent
   ports:
     - protocol: TCP
       port: 80
