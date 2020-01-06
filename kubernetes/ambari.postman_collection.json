@@ -1,0 +1,353 @@
+{
+	"info": {
+		"_postman_id": "39ddd050-705d-4170-9c36-a087885bcbdc",
+		"name": "ambari",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "get-hosts",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "admin",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://10.160.204.72:31697/api/v1/hosts",
+					"protocol": "http",
+					"host": [
+						"10",
+						"160",
+						"204",
+						"72"
+					],
+					"port": "31697",
+					"path": [
+						"api",
+						"v1",
+						"hosts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://10.160.204.72:31697/api/v1/blueprints/multi-node-hdfs-yarn",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "admin",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "X-Requested-By",
+						"value": "admin",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"Blueprints\": {\n    \"blueprint_name\": \"test-cluster-hdp3\",\n    \"stack_name\": \"HDP\",\n    \"stack_version\": \"3.0\"\n  },\n  \"settings\": [\n    {\n      \"recovery_settings\": []\n    },\n    {\n      \"service_settings\": [\n        {\n          \"name\": \"HIVE\",\n          \"credential_store_enabled\": \"false\"\n        }\n      ]\n    },\n    {\n      \"component_settings\": []\n    }\n  ],\n  \"configurations\": [\n    {\n      \"core-site\": {\n        \"fs.trash.interval\": \"4320\"\n      }\n    },\n    {\n      \"hdfs-site\": {\n        \"dfs.namenode.safemode.threshold-pct\": \"0.99\"\n      }\n    },\n    {\n      \"hive-site\": {\n        \"hive.exec.compress.output\": \"true\",\n        \"hive.merge.mapfiles\": \"true\",\n        \"hive.server2.tez.initialize.default.sessions\": \"true\",\n        \"hive.server2.transport.mode\": \"http\"\n      }\n    },\n    {\n      \"mapred-site\": {\n        \"mapreduce.job.reduce.slowstart.completedmaps\": \"0.7\",\n        \"mapreduce.map.output.compress\": \"true\",\n        \"mapreduce.output.fileoutputformat.compress\": \"true\"\n      }\n    },\n    {\n      \"yarn-site\": {\n        \"yarn.acl.enable\": \"true\"\n      }\n    }\n  ],\n  \"host_groups\": [\n    {\n      \"name\": \"master\",\n      \"configurations\": [],\n      \"components\": [\n        {\n          \"name\": \"APP_TIMELINE_SERVER\"\n        },\n        {\n          \"name\": \"HDFS_CLIENT\"\n        },\n        {\n          \"name\": \"HISTORYSERVER\"\n        },\n        {\n          \"name\": \"HIVE_CLIENT\"\n        },\n        {\n          \"name\": \"HIVE_METASTORE\"\n        },\n        {\n          \"name\": \"HIVE_SERVER\"\n        },\n        {\n          \"name\": \"JOURNALNODE\"\n        },\n        {\n          \"name\": \"MAPREDUCE2_CLIENT\"\n        },\n        {\n          \"name\": \"METRICS_COLLECTOR\"\n        },\n        {\n          \"name\": \"METRICS_MONITOR\"\n        },\n        {\n          \"name\": \"NAMENODE\"\n        },\n        {\n          \"name\": \"RESOURCEMANAGER\"\n        },\n        {\n          \"name\": \"SECONDARY_NAMENODE\"\n        },\n        {\n          \"name\": \"LIVY2_SERVER\"\n        },\n        {\n          \"name\": \"SPARK2_CLIENT\"\n        },\n        {\n          \"name\": \"SPARK2_JOBHISTORYSERVER\"\n        },\n        {\n          \"name\": \"TEZ_CLIENT\"\n        },\n        {\n          \"name\": \"YARN_CLIENT\"\n        },\n        {\n          \"name\": \"ZEPPELIN_MASTER\"\n        },\n        {\n          \"name\": \"ZOOKEEPER_CLIENT\"\n        },\n        {\n          \"name\": \"ZOOKEEPER_SERVER\"\n        }\n      ],\n      \"cardinality\": \"1\"\n    },\n    {\n      \"name\": \"worker\",\n      \"configurations\": [],\n      \"components\": [\n        {\n          \"name\": \"HIVE_CLIENT\"\n        },\n        {\n          \"name\": \"TEZ_CLIENT\"\n        },\n        {\n          \"name\": \"SPARK2_CLIENT\"\n        },\n        {\n          \"name\": \"DATANODE\"\n        },\n        {\n          \"name\": \"METRICS_MONITOR\"\n        },\n        {\n          \"name\": \"NODEMANAGER\"\n        }\n      ],\n      \"cardinality\": \"1+\"\n    },\n    {\n      \"name\": \"compute\",\n      \"configurations\": [],\n      \"components\": [\n        {\n          \"name\": \"HIVE_CLIENT\"\n        },\n        {\n          \"name\": \"TEZ_CLIENT\"\n        },\n        {\n          \"name\": \"SPARK2_CLIENT\"\n        },\n        {\n          \"name\": \"METRICS_MONITOR\"\n        },\n        {\n          \"name\": \"NODEMANAGER\"\n        }\n      ],\n      \"cardinality\": \"1+\"\n    }\n  ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://10.160.204.72:31697/api/v1/blueprints/multi-node-hdfs-yarn",
+					"protocol": "http",
+					"host": [
+						"10",
+						"160",
+						"204",
+						"72"
+					],
+					"port": "31697",
+					"path": [
+						"api",
+						"v1",
+						"blueprints",
+						"multi-node-hdfs-yarn"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create-blueprint",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "admin",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "X-Requested-By",
+						"type": "text",
+						"value": "admin"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"Blueprints\": {\n    \"blueprint_name\": \"multi-node-hdfs-yarn-hdp30\",\n    \"stack_name\": \"HDP\",\n    \"stack_version\": \"3.1\"\n  },\n  \"settings\": [\n    {\n      \"recovery_settings\": []\n    },\n    {\n      \"service_settings\": []\n    },\n    {\n      \"component_settings\": []\n    }\n  ],\n  \"configurations\": [\n    {\n      \"core-site\": {\n        \"fs.trash.interval\": \"4320\"\n      }\n    },\n    {\n      \"hdfs-site\": {\n        \"dfs.namenode.safemode.threshold-pct\": \"0.99\"\n      }\n    },\n    {\n      \"hive-site\": {\n        \"hive.exec.compress.output\": \"true\",\n        \"hive.merge.mapfiles\": \"true\",\n        \"hive.server2.tez.initialize.default.sessions\": \"true\",\n        \"hive.server2.transport.mode\": \"http\"\n      }\n    },\n    {\n      \"mapred-site\": {\n        \"mapreduce.job.reduce.slowstart.completedmaps\": \"0.7\",\n        \"mapreduce.map.output.compress\": \"true\",\n        \"mapreduce.output.fileoutputformat.compress\": \"true\"\n      }\n    },\n    {\n      \"yarn-site\": {\n        \"yarn.acl.enable\": \"true\"\n      }\n    }\n  ],\n  \"host_groups\": [\n    {\n      \"name\": \"master\",\n      \"configurations\": [],\n      \"components\": [\n        {\n          \"name\": \"APP_TIMELINE_SERVER\"\n        },\n        {\n          \"name\": \"HDFS_CLIENT\"\n        },\n        {\n          \"name\": \"HISTORYSERVER\"\n        },\n        {\n          \"name\": \"JOURNALNODE\"\n        },\n        {\n          \"name\": \"MAPREDUCE2_CLIENT\"\n        },\n        {\n          \"name\": \"METRICS_COLLECTOR\"\n        },\n        {\n          \"name\": \"METRICS_MONITOR\"\n        },\n        {\n          \"name\": \"NAMENODE\"\n        },\n        {\n          \"name\": \"RESOURCEMANAGER\"\n        },\n        {\n          \"name\": \"SECONDARY_NAMENODE\"\n        },\n        {\n          \"name\": \"TEZ_CLIENT\"\n        },\n        {\n          \"name\": \"YARN_CLIENT\"\n        },\n        {\n          \"name\": \"ZOOKEEPER_CLIENT\"\n        },\n        {\n          \"name\": \"ZOOKEEPER_SERVER\"\n        }\n      ],\n      \"cardinality\": \"1\"\n    },\n    {\n      \"name\": \"worker\",\n      \"configurations\": [],\n      \"components\": [\n        {\n          \"name\": \"TEZ_CLIENT\"\n        },\n        {\n          \"name\": \"DATANODE\"\n        },\n        {\n          \"name\": \"METRICS_MONITOR\"\n        },\n        {\n          \"name\": \"NODEMANAGER\"\n        }\n      ],\n      \"cardinality\": \"1+\"\n    },\n    {\n      \"name\": \"compute\",\n      \"configurations\": [],\n      \"components\": [\n        {\n          \"name\": \"TEZ_CLIENT\"\n        },\n        {\n          \"name\": \"METRICS_MONITOR\"\n        },\n        {\n          \"name\": \"NODEMANAGER\"\n        }\n      ],\n      \"cardinality\": \"1+\"\n    }\n  ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://10.160.204.72:31697/api/v1/blueprints/multi-node-hdfs-yarn-hdp30",
+					"protocol": "http",
+					"host": [
+						"10",
+						"160",
+						"204",
+						"72"
+					],
+					"port": "31697",
+					"path": [
+						"api",
+						"v1",
+						"blueprints",
+						"multi-node-hdfs-yarn-hdp30"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create-cluster",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "admin",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "X-Requested-By",
+						"value": "admin",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"blueprint\" : \"multi-node-hdfs-yarn-hdp30\",\n  \"default_password\" : \"my-super-secret-password\",\n  \"host_groups\" :[\n    {\n      \"name\" : \"master\", \n      \"hosts\" : [         \n        {\n          \"fqdn\" : \"amb-agent-0.amb-agent.ambari-274.svc.cluster.local\"\n        }\n      ]\n    },\n    {\n      \"name\" : \"worker\", \n      \"host_count\" : 3,\n      \"host_predicate\" : \"Hosts/os_type=centos7&Hosts/cpu_count=2\"\n    }\n  ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://10.160.204.72:31697/api/v1/clusters/arch-ml-cluster",
+					"protocol": "http",
+					"host": [
+						"10",
+						"160",
+						"204",
+						"72"
+					],
+					"port": "31697",
+					"path": [
+						"api",
+						"v1",
+						"clusters",
+						"arch-ml-cluster"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add-hosts",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "admin",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "X-Requested-By",
+						"type": "text",
+						"value": "admin"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n  {\n    \"blueprint\" : \"multi-node-hdfs-yarn-hdp30\",\n    \"host_group\" : \"worker\",\n    \"host_name\" : \"amb-agent-1.amb-agent.ambari-274.svc.cluster.local\"\n  },\n  {\n    \"blueprint\" : \"multi-node-hdfs-yarn-hdp31\",\n    \"host_group\" : \"worker\",\n    \"host_name\" : \"amb-agent-2.amb-agent.ambari-274.svc.cluster.local\"\n  }\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://10.160.204.72:31697/api/v1/clusters/arch-ml-cluster/hosts",
+					"protocol": "http",
+					"host": [
+						"10",
+						"160",
+						"204",
+						"72"
+					],
+					"port": "31697",
+					"path": [
+						"api",
+						"v1",
+						"clusters",
+						"arch-ml-cluster",
+						"hosts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get-hdp-version",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://10.160.204.72:31697/api/v1/stacks/HDP/versions/3.1/operating_systems/redhat7/repositories/HDP-3.1",
+					"protocol": "http",
+					"host": [
+						"10",
+						"160",
+						"204",
+						"72"
+					],
+					"port": "31697",
+					"path": [
+						"api",
+						"v1",
+						"stacks",
+						"HDP",
+						"versions",
+						"3.1",
+						"operating_systems",
+						"redhat7",
+						"repositories",
+						"HDP-3.1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get-hdp-util-version",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/stacks/HDP/versions/2.3/operating_systems/redhat6/repositories/HDP-UTILS-1.1.0.20",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"stacks",
+						"HDP",
+						"versions",
+						"2.3",
+						"operating_systems",
+						"redhat6",
+						"repositories",
+						"HDP-UTILS-1.1.0.20"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
