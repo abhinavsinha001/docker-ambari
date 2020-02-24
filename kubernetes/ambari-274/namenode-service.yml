@@ -6,7 +6,7 @@ metadata:
 spec:
   clusterIP: None
   selector:
-    name: amb-agent
+    app: amb-agent
   ports:
     - protocol: TCP
       port: 80
@@ -21,7 +21,7 @@ metadata:
   namespace: ambari-274
 spec:
   rules:
-  - host: hdfs-274-ny7-arch.pubmatic.com
+  - host: hdfs-274-va1-arch.pubmatic.com
     http:
       paths:
       - backend:

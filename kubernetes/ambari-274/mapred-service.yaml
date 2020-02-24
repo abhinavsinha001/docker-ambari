@@ -21,7 +21,7 @@ metadata:
   namespace: ambari-274
 spec:
   rules:
-  - host: mapred-274-ny7-arch.pubmatic.com
+  - host: mapred-274-va1-arch.pubmatic.com
     http:
       paths:
       - backend:
